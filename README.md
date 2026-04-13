@@ -15,7 +15,7 @@ As a practical exercise in modern data engineering, this project tackles the dat
 Below is the end-to-end data flow of the **Fuzzy Analytics Pipeline**, illustrating the movement of data from source systems to the final analytics layer.
 
 <p align="center">
-  <img src="docs/Fuzzy_Analytics_pipeline.png" width="900" alt="Fuzzy Analytics Pipeline Flow">
+  <img src="docs/Fuzzy_Analytics_Pipeline.png" width="900" alt="Fuzzy Analytics Pipeline Flow">
 </p>
 
 ---
