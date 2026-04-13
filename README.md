@@ -15,11 +15,7 @@ As a practical exercise in modern data engineering, this project tackles the dat
 Below is the end-to-end data flow of the **Fuzzy Analytics Pipeline**, illustrating the movement of data from source systems to the final analytics layer.
 
 <p align="center">
-  <img 
-    src="./data_dictionary/Fuzzy_analytics_pipeline.png"
-    width="900"
-    alt="Fuzzy Analytics Pipeline Flow"
-  />
+  <img src="docs/Fuzzy_Analytics_pipeline.png" width="900" alt="Fuzzy Analytics Pipeline Flow">
 </p>
 
 ---
@@ -57,6 +53,8 @@ fuzzy_pipeline/
 * Date range: March 2012 – March 2015
 * 4 products launched progressively across the period
 
+> **Note:** For a comprehensive technical deep-dive, including the full schema and data transformations, please refer to the [Data Dictionary](./docs/Data_Dictionary.pdf).
+
 ## Key Features
 
 * **Automated End-to-End Orchestration:** Automates full data lifecycles from extraction to loading and transformation, ensuring seamless synchronization between MySQL, S3, and BigQuery.
@@ -84,4 +82,5 @@ fuzzy_pipeline/
 ## Dashboard & BI Report
 
 | **Looker Studio Dashboard** | Interactive monitoring layer | [View Dashboard](https://lookerstudio.google.com/reporting/d1cbca11-1ae3-46e4-affe-8b06de254a37) |
+
 | **Canva BI Report** | Executive narrative report | [View Report](https://canva.link/fwlq6xbygip4n3s) |
