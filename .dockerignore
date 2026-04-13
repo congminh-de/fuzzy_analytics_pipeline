@@ -1,0 +1,6 @@
+venv/
+.git/
+__pycache__/
+*.csv
+*.docx
+mysql_data/

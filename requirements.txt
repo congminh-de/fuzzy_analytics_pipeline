@@ -1,0 +1,15 @@
+dagster
+dagster-webserver
+polars
+pandas
+sqlalchemy
+pymysql
+boto3
+pandas-gbq
+google-cloud-bigquery
+dagster-aws
+dagster-gcp
+python-dotenv
+connectorx
+dbt-bigquery
+dagster-dbt

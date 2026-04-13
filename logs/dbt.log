@@ -1,0 +1,31 @@
+[0m14:52:11.665532 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x784d6e876990>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x784d6e8aead0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x784d6e8acd50>]}
+
+
+============================== 14:52:11.679967 | b4b181f3-c78f-44cc-972d-2906bbe96ff8 ==============================
+[0m14:52:11.679967 [info ] [MainThread]: Running with dbt=1.11.7
+[0m14:52:11.682173 [debug] [MainThread]: running dbt with arguments {'log_path': 'logs', 'profiles_dir': '/root/.dbt', 'warn_error': 'None', 'partial_parse': 'True', 'debug': 'False', 'cache_selected_only': 'False', 'introspect': 'True', 'empty': 'None', 'fail_fast': 'False', 'quiet': 'False', 'use_colors': 'True', 'target_path': 'None', 'write_json': 'True', 'use_experimental_parser': 'False', 'send_anonymous_usage_stats': 'True', 'printer_width': '80', 'log_format': 'default', 'no_print': 'None', 'invocation_command': 'dbt init fuzzy_dbt', 'log_cache_events': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'version_check': 'True', 'static_parser': 'True', 'indirect_selection': 'eager'}
+[0m14:52:11.720074 [info ] [MainThread]: Creating dbt configuration folder at /root/.dbt
+[0m14:52:11.738905 [debug] [MainThread]: Starter project path: /usr/local/lib/python3.11/site-packages/dbt/include/starter_project
+[0m14:52:11.930661 [info ] [MainThread]: 
+Your new dbt project "fuzzy_dbt" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m14:52:11.933214 [info ] [MainThread]: Setting up your profile.
+[0m14:56:16.676172 [info ] [MainThread]: Profile fuzzy_dbt written to /root/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m14:56:16.683157 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 245.18188, "process_in_blocks": "27384", "process_kernel_time": 6.472658, "process_mem_max_rss": "223968", "process_out_blocks": "848", "process_user_time": 3.917526}
+[0m14:56:16.686474 [debug] [MainThread]: Command `dbt init` succeeded at 14:56:16.686116 after 245.19 seconds
+[0m14:56:16.693219 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x784d6e8deb50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x784d6e86c390>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x784d6c88acd0>]}
+[0m14:56:16.694792 [debug] [MainThread]: Flushing usage events
+[0m14:56:17.957043 [debug] [MainThread]: An error was encountered while trying to flush usage events

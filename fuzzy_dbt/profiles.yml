@@ -1,0 +1,11 @@
+fuzzy_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('BQ_PROJECT_ID') }}"
+      dataset: "{{ env_var('BQ_DATASET') }}"
+      threads: 2
+      keyfile: /opt/dagster/app/bq_key.json 
+      location: US 

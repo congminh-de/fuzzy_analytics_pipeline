@@ -1,0 +1,19 @@
+# (Data Lake/Warehouse local)
+mysql_data/
+dagster_home/
+fuzzy_oltp/
+data_output/
+
+# venv
+venv/
+__pycache__/
+*.pyc
+
+# security
+bq_key.json
+.env
+
+# system trash
+.DS_Store
+Thumbs.db
+logs/
