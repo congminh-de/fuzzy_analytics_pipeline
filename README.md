@@ -1,4 +1,5 @@
 # Fuzzy Analytics (ELT) Pipeline 
+![CI Status](https://github.com/congminh-de/fuzzy_analytics_pipeline/actions/workflows/ci.yml/badge.svg)
 
 ---
 
