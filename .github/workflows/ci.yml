@@ -46,6 +46,9 @@ jobs:
       
 
       - name: dbt check
+        env:
+          BQ_PROJECT_ID: fake-project
+          BQ_DATASET: fake_dataset  
         run: |
           cd fuzzy_dbt
           mkdir -p ~/.dbt
