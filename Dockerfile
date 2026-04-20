@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install uv && python -m uv pip install --system --no-cache -r requirements.txt 
 
 
 COPY . .

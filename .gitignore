@@ -5,9 +5,12 @@ fuzzy_oltp/
 data_output/
 
 # venv
+.venv/
 venv/
 __pycache__/
 *.pyc
+.dagster/
+.vscode/
 
 # security
 bq_key.json
