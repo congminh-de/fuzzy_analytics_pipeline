@@ -1,6 +1,11 @@
 storage:
-  sqlite:
-    base_dir: /opt/dagster/dagster_home/storage 
+  postgres:
+    postgres_db:
+      hostname: postgres_db
+      username: dagster_user
+      password: dagster_password
+      db_name: dagster_db
+      port: 5432
 
 run_coordinator:
   module: dagster._core.run_coordinator

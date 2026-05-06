@@ -1,35 +1,27 @@
 FROM python:3.11-slim
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
 ENV DEBIAN_FRONTEND=noninteractive
-
-
 WORKDIR /opt/dagster/app
-
 
 RUN apt-get update && apt-get install -y \
     build-essential \
     libmariadb-dev \
+    libpq-dev \
     gcc \
     && rm -rf /var/lib/apt/lists/*
 
+COPY pyproject.toml uv.lock ./
+ENV UV_PROJECT_ENVIRONMENT="/opt/dagster/.venv"
+RUN uv sync --frozen --no-dev 
 
-COPY requirements.txt .
-
-
-RUN pip install uv && python -m uv pip install --system --no-cache -r requirements.txt 
-
-
+ENV PATH="/opt/dagster/.venv/bin:$PATH"
 COPY . .
-
 
 ENV DAGSTER_HOME=/opt/dagster/dagster_home
 RUN mkdir -p $DAGSTER_HOME
-
-
 EXPOSE 3000
-
-
 CMD ["dagster-webserver", "-h", "0.0.0.0", "-p", "3000", "-w", "workspace.yaml"]
 
 

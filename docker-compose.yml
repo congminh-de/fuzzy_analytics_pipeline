@@ -21,7 +21,22 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1G
+          memory: 512M
+    networks:
+      - fuzzy_net
+
+
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: dagster_user
+      POSTGRES_PASSWORD: dagster_password
+      POSTGRES_DB: dagster_db
+    deploy:
+      resources:
+        limits:
+          memory: 128M 
     networks:
       - fuzzy_net
 
@@ -31,6 +46,7 @@ services:
     container_name: dagster_app
     restart: always
     environment:
+      - DAGSTER_IS_DEV_ENV=1
       - DAGSTER_HOME=/opt/dagster/dagster_home
       - MYSQL_HOST=mysql_source
       - MYSQL_USER=${MYSQL_USER}
@@ -49,7 +65,6 @@ services:
       - ./bq_key.json:/opt/dagster/app/bq_key.json
     ports:
       - "3000:3000"
-    entrypoint: ["dagster-webserver", "-h", "0.0.0.0", "-p", "3000", "-w", "workspace.yaml"]
     depends_on:
       mysql_source:
         condition: service_healthy
@@ -75,10 +90,12 @@ services:
       - .env
     depends_on:
       - dagster_app
+    networks:
+      - fuzzy_net
     deploy:
       resources:
         limits: 
-          memory: 512M
+          memory: 640M
 
 
 networks:
