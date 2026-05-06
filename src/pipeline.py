@@ -9,7 +9,7 @@ from dagster import (
     asset, Definitions, AssetIn, AssetSelection, 
     define_asset_job, ScheduleDefinition, AssetExecutionContext,
     run_status_sensor, DagsterRunStatus,
-    RunStatusSensorContext
+    RunStatusSensorContext, multiprocess_executor
 )
 from dagster_dbt import DbtProject, DbtCliResource, dbt_assets
 from google.cloud import bigquery
@@ -53,7 +53,7 @@ def create_assets(table_name):
     def upload_to_s3(df: pl.DataFrame):
         local_path = f"/tmp/{table_name}.parquet"
         df.write_parquet(local_path)
-
+        
         s3 = get_s3_client()
         bucket = os.getenv("S3_BUCKET_NAME")
         s3_key = f"raw/{table_name}/{datetime.now().strftime('%Y%m%d_%H%M')}.parquet"
@@ -79,7 +79,7 @@ for t in TABLES:
 @dbt_assets(manifest=dbt_project.manifest_path)
 def fuzzy_dbt_assets(context: AssetExecutionContext, dbt: DbtCliResource):
     dbt.cli(["deps"]).wait()
-    yield from dbt.cli(["run"], context=context).stream()
+    yield from dbt.cli(["build", "--threads", "1"], context=context).stream()
     dbt.cli(["docs", "generate"]).wait()
 
 def send_gmail_notification(subject, body):
@@ -113,6 +113,7 @@ defs = Definitions(
             profiles_dir=os.fspath(dbt_project.project_dir),
         ),
     },
+    executor=multiprocess_executor.configured({"max_concurrent": 1}),    
     jobs=[ecommerce_all_job],
     schedules=[
         ScheduleDefinition(name="daily_ecommerce_schedule", job=ecommerce_all_job, cron_schedule="0 8 * * *")
