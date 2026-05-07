@@ -27,15 +27,14 @@ jobs:
           fi
           echo "Ko phát hiện file nhạy cảm"
 
-      - name: set up python
+      - name: Set up Python
         uses: astral-sh/setup-uv@v5
         with:
-          python-version: 3.11
-          enable-cache: True
+          python-version: '3.11'
+          enable-cache: true
 
       - name: Install dependencies
-        run: |
-          uv sync --frozen
+        run: uv sync --frozen
 
       - name: Lint with flake8
         run: |
@@ -50,29 +49,29 @@ jobs:
 
       - name: dbt parse and compile
         run: |
-          cd fuzzy_dbt
-          uv run dbt deps
           mkdir -p /tmp/ci_profiles
-          cat > /tmp/ci_profiles/profiles.yml << PROFILE
+          cat > /tmp/ci_profiles/profiles.yml << 'PROFILE'
           fuzzy_dbt:
             target: dev
             outputs:
               dev:
                 type: bigquery
                 method: oauth
-                project: $BQ_PROJECT_ID
-                dataset: $BQ_DATASET
-                schema: $BQ_DATASET
+                project: fake-project
+                dataset: fake_dataset
                 threads: 1
                 location: US
           PROFILE
-          uv run dbt deps --quiet
+
+          cd fuzzy_dbt
+          
+          uv run dbt deps --profiles-dir /tmp/ci_profiles --quiet
           uv run dbt parse --profiles-dir /tmp/ci_profiles
           uv run dbt compile --profiles-dir /tmp/ci_profiles --no-populate-cache
         env:
           BQ_PROJECT_ID: ${{ secrets.BQ_PROJECT_ID }}
           BQ_DATASET: ${{ secrets.BQ_DATASET }}
- 
+
       - name: Verify Dagster definitions
         run: |
           uv run python -W ignore -c "
@@ -81,7 +80,7 @@ jobs:
           job_count = len(defs.jobs)
           schedule_count = len(defs.schedules)
           sensor_count = len(defs.sensors)
-          print(f'Dagster Definitions hợp lệ')
+          print(f'Dagster Definitions hop le')
           print(f'  Assets:    {asset_count}')
           print(f'  Jobs:      {job_count}')
           print(f'  Schedules: {schedule_count}')
