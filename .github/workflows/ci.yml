@@ -62,8 +62,11 @@ jobs:
                 method: oauth
                 project: $BQ_PROJECT_ID
                 dataset: $BQ_DATASET
+                schema: $BQ_DATASET
                 threads: 1
+                location: US
           PROFILE
+          uv run dbt deps --quiet
           uv run dbt parse --profiles-dir /tmp/ci_profiles
           uv run dbt compile --profiles-dir /tmp/ci_profiles --no-populate-cache
         env:
