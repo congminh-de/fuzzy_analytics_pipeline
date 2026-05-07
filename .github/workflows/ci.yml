@@ -42,8 +42,8 @@ jobs:
         run: |
           cd fuzzy_dbt
           uv run dbt deps
-          mkdir -p ~/.dbt
-          cat <<EOF > ~/.dbt/profiles.yml
+          mkdir -p /tmp/ci_profiles
+          cat > /tmp/ci_profiles/profiles.yml << 'PROFILE'
           fuzzy_dbt:
             target: dev
             outputs:
@@ -53,10 +53,9 @@ jobs:
                 project: fake-project
                 dataset: fake_dataset
                 threads: 1
-                keyfile: /dev/null
-          EOF
-          uv run dbt parse
-          uv run dbt compile --no-populate-cache
+          PROFILE
+          uv run dbt parse --profiles-dir /tmp/ci_profiles
+          uv run dbt compile --profiles-dir /tmp/ci_profiles --no-populate-cache
         env:
           BQ_PROJECT_ID: fake-project
           BQ_DATASET: fake_dataset
