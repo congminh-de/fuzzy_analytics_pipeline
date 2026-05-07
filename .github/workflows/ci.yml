@@ -49,14 +49,14 @@ jobs:
             outputs:
               dev:
                 type: bigquery
-                method: service-account
+                method: oauth
                 project: fake-project
                 dataset: fake_dataset
                 threads: 1
                 keyfile: /dev/null
           EOF
           uv run dbt parse
-          uv run dbt compile
+          uv run dbt compile --no-populate-cache
         env:
           BQ_PROJECT_ID: fake-project
           BQ_DATASET: fake_dataset
