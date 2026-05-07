@@ -64,7 +64,7 @@ jobs:
           PROFILE
 
           cd fuzzy_dbt
-          
+
           uv run dbt deps --profiles-dir /tmp/ci_profiles --quiet
           uv run dbt parse --profiles-dir /tmp/ci_profiles
           uv run dbt compile --profiles-dir /tmp/ci_profiles --no-populate-cache
@@ -76,15 +76,15 @@ jobs:
         run: |
           uv run python -W ignore -c "
           from pipeline import defs
-          asset_count = len(defs.get_all_asset_specs())
-          job_count = len(defs.jobs)
-          schedule_count = len(defs.schedules)
-          sensor_count = len(defs.sensors)
-          print(f'Dagster Definitions hop le')
-          print(f'  Assets:    {asset_count}')
-          print(f'  Jobs:      {job_count}')
-          print(f'  Schedules: {schedule_count}')
-          print(f'  Sensors:   {sensor_count}')
+          from dagster import Definitions
+          assert isinstance(defs, Definitions), 'defs không phải Definitions object'
+          assert len(defs.jobs) > 0, 'Không có jobs'
+          assert len(defs.schedules) > 0, 'Không có schedules'
+          assert len(defs.sensors) > 0, 'Không có sensors'
+          print('Dagster Definitions hop le')
+          print(f'  Jobs:      {len(defs.jobs)}')
+          print(f'  Schedules: {len(defs.schedules)}')
+          print(f'  Sensors:   {len(defs.sensors)}')
           "
         env:
           PYTHONPATH: src
