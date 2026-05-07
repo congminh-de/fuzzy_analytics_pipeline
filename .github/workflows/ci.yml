@@ -45,7 +45,7 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: 'projects/regal-cursor-482204-h6/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          workload_identity_provider: 'projects/28912745518/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
           service_account: 'dagster-bot@regal-cursor-482204-h6.iam.gserviceaccount.com'
 
       - name: dbt parse and compile
